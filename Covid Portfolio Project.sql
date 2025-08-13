@@ -1,3 +1,50 @@
+--Queries i used in the Covid-19 Overview (Jan 2020 - April 2021)--
+
+--1. For the GLOBAL Numbers as of 2021
+
+Select 
+	SUM(new_cases) as total_cases,
+	SUM(cast(new_deaths as int)) as total_deaths,
+	SUM(cast(new_deaths as int))/SUM(New_Cases)*100 as DeathPercentage
+From CovidDeaths
+where continent is not null 
+order by 1,2
+
+--2. For the Total Deaths per Continent
+
+Select 
+	location,
+	SUM(cast(new_deaths as int)) as TotalDeathCount
+From CovidDeaths
+Where continent is null 
+and location not in ('World', 'European Union', 'International')
+Group by location
+order by TotalDeathCount desc
+
+--3. For the Percent of Population Infected Per Country
+
+Select Location,
+	Population,
+	MAX(total_cases) as HighestInfectionCount,
+	Max((total_cases/population))*100 as PercentPopulationInfected
+From CovidDeaths
+Group by Location, Population
+order by PercentPopulationInfected desc
+
+--4. For the AVG % of Population Infected
+
+Select Location,
+	Population,date,
+	MAX(total_cases) as HighestInfectionCount,
+	Max((total_cases/population))*100 as PercentPopulationInfected
+From CovidDeaths
+Group by Location, Population, date
+order by PercentPopulationInfected desc
+	
+
+------------------------------TEST RUNS-----------------------------------
+	
+
 SELECT 
 	Location, date, total_cases, new_cases, total_deaths, population
 FROM CovidDeaths
@@ -128,5 +175,6 @@ JOIN CovidVaccinations AS vac
 	ON dea.location = vac.location
 	AND dea.date = vac.date
 WHERE dea.continent is not null
+
 
 
