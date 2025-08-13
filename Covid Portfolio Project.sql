@@ -3,7 +3,7 @@ SELECT
 FROM CovidDeaths
 Order BY 1,2
 
---Select DATA that we are going to be using
+--Select DATA that is going to be used
 
 SELECT 
 	Location,
@@ -17,7 +17,7 @@ Order BY 1,2
 	
 
 --Looking at Total Cases vs. Total Deaths
---Shows likelihood of dying if you contract covid in your country
+--Shows likelihood of dying if contract covid in a country
 
 SELECT 
 	Location,
@@ -128,4 +128,5 @@ JOIN CovidVaccinations AS vac
 	ON dea.location = vac.location
 	AND dea.date = vac.date
 WHERE dea.continent is not null
+
 
