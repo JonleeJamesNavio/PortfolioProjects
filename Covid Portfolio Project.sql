@@ -3,8 +3,7 @@ SELECT
 FROM CovidDeaths
 Order BY 1,2
 
-
-
+--Select DATA that we are going to be using
 
 SELECT 
 	Location,
@@ -15,8 +14,10 @@ SELECT
 FROM CovidDeaths
 Where location = 'Philippines'
 Order BY 1,2
+	
 
-
+--Looking at Total Cases vs. Total Deaths
+--Shows likelihood of dying if you contract covid in your country
 
 SELECT 
 	Location,
@@ -29,7 +30,7 @@ Where location = 'Philippines'
 Order BY 1,2
 
 
-
+--Looking at Countries with HIGHEST Infection Rate compared to Population
 
 SELECT 
 	Location,
@@ -41,7 +42,7 @@ Group BY Location, population
 Order BY PercentofPopulationInfected DESC
 
 
-
+--Global Numbers
 
 SELECT 
 	date,
@@ -54,6 +55,7 @@ Group BY date
 Order BY 1,2
 
 
+--USING CTE
 
 WITH PopvsVac (Continent, Location, Date, Population, New_Vaccinations, VaccinatedPeoplePerDay)
 AS (
@@ -126,3 +128,4 @@ JOIN CovidVaccinations AS vac
 	ON dea.location = vac.location
 	AND dea.date = vac.date
 WHERE dea.continent is not null
+
