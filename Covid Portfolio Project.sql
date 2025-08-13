@@ -1,4 +1,5 @@
 --Queries i used in the Covid-19 Overview (Jan 2020 - April 2021)--
+--TABLEAU PROJECT--
 
 --1. For the GLOBAL Numbers as of 2021
 
@@ -175,6 +176,7 @@ JOIN CovidVaccinations AS vac
 	ON dea.location = vac.location
 	AND dea.date = vac.date
 WHERE dea.continent is not null
+
 
 
 
